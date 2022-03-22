@@ -4,10 +4,10 @@ from co2_data.exceptions import RequestException
 class CO2APIManager(object):
 
     URL = 'api-recrutement.ecoco2.com'
-    ENDPOINTS = ['v1/data/', ]
+    ENDPOINTS = ['v1/data', ]
 
     @classmethod
-    def execute(cls, endpoint, method, arguments, data=None, *args, **kwargs):
+    def execute(cls, endpoint, method, arguments=None, data=None, *args, **kwargs):
         if endpoint not in cls.ENDPOINTS:
             raise RequestException("Endpoint not found in class ENDPOINTS")
         call = getattr(requests, method)

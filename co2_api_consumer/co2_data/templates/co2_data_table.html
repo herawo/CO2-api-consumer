@@ -1,0 +1,21 @@
+{% block content %}
+    <h2>Data</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Taux</th>
+                <th>Différence avec la moyenne</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for data in latests %}
+            <tr>
+                <td>{{ data.date }}</td>
+                <td>{{ data.rate }}</td>
+                <td>{{ data.get_rate_diff}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% block content %}
+    <h2>Data</h2>
+    <table>
+        <thead>
+            <tr>
+                {% for time in times %}
+                    <th>{{time}}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% regroup object_list by time as rate_list %}
+            {% for timed_data in rate_list %}
+            <tr>
+                <td>{{ timed_data.grouper }}</td>
+                {% for data in timed_data.list %}
+                    <td>{{data.rate}}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
