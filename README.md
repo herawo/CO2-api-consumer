@@ -6,9 +6,7 @@ CO2 api consumer
 
 créer et entrer dans un env virtuel
 
-`mkvirtualenv <env>`
-
-`virtualenv <env>`
+`mkvirtualenv <env>` ou `virtualenv <env>`
 
 installer les dépendances
 
