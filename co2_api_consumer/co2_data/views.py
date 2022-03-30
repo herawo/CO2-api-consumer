@@ -10,8 +10,10 @@ class CO2DataListView(ListView):
         latests = self.model.objects.order_by('-date')[:20]
         context = super().get_context_data(**kwargs)
         context['latests'] = latests
-        print('latest', latests)
+        context['avg_wd'] = CO2Data.get_avg_businessday()
+        context['avg_we'] = CO2Data.get_avg_weekend()
         return context
+
 
 class CO2DataFrequencyListView(ListView):
     model = CO2DataFrequency
@@ -21,5 +23,6 @@ class CO2DataFrequencyListView(ListView):
         times = self.model.objects.all().order_by('time').values('time').distinct()
         context = super().get_context_data(**kwargs)
         context['times'] = [time.get('time').strftime("%H-%M") for time in times]
+        
         return context
     

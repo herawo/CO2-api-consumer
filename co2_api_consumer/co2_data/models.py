@@ -32,6 +32,21 @@ class CO2Data(models.Model):
     def get_rate_diff(self):
         return CO2DataFrequency.get_avg_at_time(datetime=self.date).get('average_rate') - self.rate
 
+    @classmethod
+    def get_avg_days(cls, days):
+        data_avg = cls.objects.filter(date__week_day__in=days)
+        return data_avg.aggregate(
+            calc=(Sum('rate') / Count('rate') )
+        ).get('calc')
+
+    @classmethod
+    def get_avg_weekend(cls):
+        return cls.get_avg_days([2, 3, 4, 5, 6, ])
+
+    @classmethod
+    def get_avg_businessday(cls):
+        return cls.get_avg_days([1, 7, ])
+
 class CO2DataFrequency(models.Model):
     rate = models.IntegerField()
     time = models.TimeField()
